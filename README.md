@@ -1,10 +1,14 @@
 # SCDsim
 
 SCDsim/TestBentch.m: Run the simulation compare the floating point and fixed point. 
+
   Parameters:
+  
               bit: store the worldlength of each block. 
               Type: 'FAM' or 'SSCA' to simulate in FAM or SSCA method. 
+              
   Functions:
+  
               autofamFixedv3.m: run the FAM method in fixed point
                             input:
                                    x: input column vector 
