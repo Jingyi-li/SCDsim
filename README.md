@@ -36,6 +36,6 @@ Plot the simulation result with theory result and there errors in SQNR
 ![FAMvsSSCA](https://user-images.githubusercontent.com/33167403/110276173-b0e76780-8026-11eb-8e00-f2ed1f2e370c.jpg)
 ![ErrorsofSimandTheory](https://user-images.githubusercontent.com/33167403/110276177-b5ac1b80-8026-11eb-8acd-302c61dab12a.jpg)
 
-## TestCheckResult.m
+## SCDsim/TestCheckResult.m
 Pareto Optimal 
 ![CandSQNR](https://user-images.githubusercontent.com/33167403/110276255-dbd1bb80-8026-11eb-8e7b-7493255907c3.jpg)
