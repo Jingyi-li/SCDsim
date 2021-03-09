@@ -3,54 +3,36 @@
 % clear all;
 
 result_save = {'sum','bit_W','bit_F1', 'bit_CM','bit_F2','Theory_result','TotalCost','UnitSQNR','UnitCost'};
-% for b = 14:24
-%     result = SQNR1CostFAM(b,b,b,b);
-%     result_save = [result_save; {result.sum,b,b,b,b,result.SQNR,result.cost,result.unitSQNR,result.unitcost}];
-% end
+for b = 14:24
+    result = SQNR1CostFAM(b,b,b,b);
+    result_save = [result_save; {result.sum,b,b,b,b,result.SQNR,result.cost,result.unitSQNR,result.unitcost}];
+end
+unitBit = result_save;
 
+result_save = {'sum','bit_W','bit_F1', 'bit_CM','bit_F2','Theory_result','TotalCost','UnitSQNR','UnitCost'};
 CRbest = {'sum','bit_W','bit_F1', 'bit_CM','bit_F2','Theory_result','TotalCost','UnitSQNR','UnitCost'};
 
 
-% aimSQNR = [60,70,80,90,100,110];
-% aimcost = 2*10^17.*[0.1,0.3,0.5,0.7,0.9,1,1.1,1.3,1.5,1.7,1.9];
-
-% method = 'Check_cost';
-% method = 'Check_SQNR';
-method = 'none';
+aimSQNR = [60,70,80,90,100,110];
+aimcost = 2*10^17.*[0.1,0.3,0.5,0.7,0.9,1,1.1,1.3,1.5,1.7,1.9];
 
 
 % Rsum = 72;
 Rcost = 0;
-
 Rbest = {};
 
-
-% for b = aimcost
 for a = aimSQNR
     Rcs = Inf;
-    Rexp = 0;
-  
     for bw=12:26
         for bf1=12:26
             for bcm=12:26
                 for bf2=12:26
                     result = SQNR1CostFAM(bw,bf1,bcm,bf2);
-                    result_save = [result_save; {result.sum,bw,bf1,bcm,bf2,result.SQNR,result.cost,result.unitSQNR,result.unitcost}];
-                    switch method
-                        case 'Check_SQNR'
-                            if a< result.SQNR
-                                if result.cost<Rcs
-                                    Rcs = result.cost;
-                                    Rbest = {result.sum,bw,bf1,bcm,bf2,result.SQNR,result.cost,result.unitSQNR,result.unitcost};
-                                end
-                            end
-                        case 'Check_cost'
-                            if result.cost < b
-                                if result.SQNR>Rexp
-                                    Rexp = result.SQNR;
-                                    Rbest = {result.sum,bw,bf1,bcm,bf2,result.SQNR,result.cost,result.unitSQNR,result.unitcost};
-                                end
-                            end
+                    if a< result.SQNR
+                        if result.cost<Rcs
+                            Rcs = result.cost;
+                            Rbest = {result.sum,bw,bf1,bcm,bf2,result.SQNR,result.cost,result.unitSQNR,result.unitcost};
+                        end
                     end
                 end
             end
@@ -58,22 +40,56 @@ for a = aimSQNR
     end
     CRbest = [CRbest; Rbest];
 end
-% end
+givenSQNR = CRbest;
 
+CRbest = {'sum','bit_W','bit_F1', 'bit_CM','bit_F2','Theory_result','TotalCost','UnitSQNR','UnitCost'};
+for b = aimcost
+    Rexp = 0;
+    for bw=12:26
+        for bf1=12:26
+            for bcm=12:26
+                for bf2=12:26
+                    result = SQNR1CostFAM(bw,bf1,bcm,bf2);
+                    if result.cost < b
+                        if result.SQNR>Rexp
+                            Rexp = result.SQNR;
+                            Rbest = {result.sum,bw,bf1,bcm,bf2,result.SQNR,result.cost,result.unitSQNR,result.unitcost};
+                        end
+                    end
+                    
+                end
+            end
+        end
+    end
+    CRbest = [CRbest; Rbest];
+end
+givenCost = CRbest;
 
+for c = 60
+    Rcs = Inf;
+    for bw=12:26
+        for bf1=12:26
+            for bcm=12:26
+                for bf2=12:26
+                    result = SQNR1CostFAM(bw,bf1,bcm,bf2);
+                    if c< result.SQNR
+                        result_save = [result_save; {result.sum,bw,bf1,bcm,bf2,result.SQNR,result.cost,result.unitSQNR,result.unitcost}];
+                    end
+                end
+            end
+        end
+    end
+end
 
 
 %% Plot figure
 
 figure;
 hold on
-% givenSQNR = CRbest;
-% givenCost = CRbest;
-% unitBit = result_save;
-p1=plot(1./cell2mat(givenSQNR(2:end,6)),cell2mat(givenSQNR(2:end,7)),'ro','DisplayName','Lowest Cost for SQNR');
-p2=plot(1./cell2mat(givenCost(2:end,6)),cell2mat(givenCost(2:end,7)),'b*','DisplayName','Highest SQNR for Cost');
-p3=plot(1./cell2mat(unitBit(2:end,6)),cell2mat(unitBit(2:end,7)),'ks','DisplayName','uniform bits');
-p4=plot(1./cell2mat(result_save(2:500:end,6)),cell2mat(result_save(2:500:end,7)),'gs','DisplayName','Non-uniform bits');
+p1=plot(cell2mat(givenSQNR(2:end,6)),cell2mat(givenSQNR(2:end,7)),'ro','DisplayName','Lowest Cost for SQNR');
+p2=plot(cell2mat(givenCost(2:end,6)),cell2mat(givenCost(2:end,7)),'b*','DisplayName','Highest SQNR for Cost');
+p3=plot(cell2mat(unitBit(2:end,6)),cell2mat(unitBit(2:end,7)),'ks','DisplayName','uniform bits');
+p4=plot(cell2mat(result_save(2:500:end,6)),cell2mat(result_save(2:500:end,7)),'gs','DisplayName','Non-uniform bits');
 legend([p1,p2,p3,p4],'Location','best');
 ylabel('Area (full adders)');
 xlabel('1/SQNR (dB)');
@@ -139,64 +155,3 @@ result.unitcost = unit_cost;
 
 end
 
-function result = SQNR1CostSSCA(bw,bf1,bcm,bf2)
-q1 = 0.085689098;
-q2 = 1.1594887;
-q3 = 0.019419288;
-Ps = 0.15800409;
-
-sum = bw+bf1+bcm+bf2;
-nFFT1 = 256;
-nFFT2 = 32;
-nFFT3 = 2048;
-bits = bw-1;
-bit_fft1 = bf1-1;
-bit_multi = bcm-1;
-bit_fft2 = bf2-1;
-
-Psignal = Ps^2*q1^2*q2^2*q3^2/1.59^2*nFFT1*nFFT3;
-Pnoise = Ps*q3^2*q2^2*q1^2*nFFT1*nFFT3/6*2^(-2*bits) ...
-            + q3^2*Ps*nFFT3*q2^2*(q1^2*(nFFT1/6-1)+1/2)/3*2^(-2*bit_fft1)...
-            + (q2^2+1/2)*q3^2*nFFT3/3*2^(-2*bit_multi) ...
-            + (q3^2*(nFFT3/6-1)+1/2)/3*2^(-2*bit_fft2);
-
-expR = 10*log10(Psignal/Pnoise);
-
-unit_bit = floor(sum/4);
-bit = unit_bit-1;
-Pnoise = Ps*q3^2*q2^2*q1^2*nFFT1*nFFT3/6*2^(-2*bit) ...
-            + q3^2*Ps*nFFT3*q2^2*(q1^2*(nFFT1/6-1)+1/2)/3*2^(-2*bit)...
-            + (q2^2+1/2)*q3^2*nFFT3/3*2^(-2*bit) ...
-            + (q3^2*(nFFT3/6-1)+1/2)/3*2^(-2*bit);
-
-unit_SQNR = 10*log10(Psignal/Pnoise);
-
-
-
-cm_bit = 2*nFFT1*nFFT3;
-cm_firstFFT = 4*nFFT3*nFFT1/2*log2(nFFT1)+2*nFFT1*nFFT3+4*nFFT1*nFFT3;
-cm_multi = 4*nFFT1*nFFT3+2*nFFT1*nFFT3;
-cm_secondFFT = 4*nFFT1*nFFT3/2*log2(nFFT3)+2*nFFT1*nFFT3;
-
-ca_firstFFT = 3*nFFT1*nFFT3*log2(nFFT1)+2*nFFT1*nFFT3;
-ca_multi = 2*nFFT1*nFFT3;
-ca_secondFFT = 3*nFFT1*nFFT3*log2(nFFT3);
-
-
-cost = (cm_bit*bw)^2 ...
-    + (cm_firstFFT*bf1)^2+ca_firstFFT*bf1 ...
-    + (cm_multi*bcm)^2+ca_multi*bcm ...
-    + (cm_secondFFT*bf2)^2+ca_secondFFT*bf2;
-unit_cost = (cm_bit*unit_bit)^2 ...
-    + (cm_firstFFT*unit_bit)^2+ca_firstFFT*unit_bit ...
-    + (cm_multi*unit_bit)^2+ca_multi*unit_bit ...
-    + (cm_secondFFT*unit_bit)^2+ca_secondFFT*unit_bit;
-
-
-result.sum = sum;
-result.SQNR = expR;
-result.unitSQNR = unit_SQNR;
-result.cost = cost;
-result.unitcost = unit_cost;
-
-end

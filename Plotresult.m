@@ -39,22 +39,27 @@ ylabel('Errors of SQNR (dB)');
 %% plot fig
 figure;
 hold on
-p1=plot(x, cell2mat(result.input1.FAM(2:end,5)),'ro','DisplayName','DeepSigFAMSimu');
-p2=plot(x, cell2mat(result.input1.FAM(2:end,6)),'r*','DisplayName','DeepSigFAMTheory');
-p3=plot(x, cell2mat(result.input1.SSCA(2:end,5)),'rs','DisplayName','DeepSigSSCASimu');
-p4=plot(x, cell2mat(result.input1.SSCA(2:end,6)),'r.','DisplayName','DeepSigSSCATheory');
+plot(x, cell2mat(result.input1.FAM(2:end,5)),'ro','DisplayName','FAMSimu');
+plot(x, cell2mat(result.input1.FAM(2:end,6)),'r*','DisplayName','FAMTheory');
+plot(x, cell2mat(result.input1.SSCA(2:end,5)),'rs','DisplayName','SSCASimu');
+plot(x, cell2mat(result.input1.SSCA(2:end,6)),'r.','DisplayName','SSCATheory');
 
-p5=plot(x, cell2mat(result.input2.FAM(2:end,5)),'bo','DisplayName','SineWaveFAMSimu');
+plot(x, cell2mat(result.input2.FAM(2:end,5)),'bo');%,'DisplayName','SineWaveFAMSimu'
 plot(x,cell2mat( result.input2.FAM(2:end,6)),'b*');%,'DisplayName','SineWaveFAMTheory'
 plot(x,cell2mat(result.input2.SSCA(2:end,5)),'bs');%,'DisplayName','SineWaveSSCASimu'
 plot(x,cell2mat( result.input2.SSCA(2:end,6)),'b.');%,'DisplayName','SineWaveSSCATheory'
 
-p6=plot(x,cell2mat(result.input3.FAM(2:end,5)),'go','DisplayName','SquareWaveFAMSimu');
+plot(x,cell2mat(result.input3.FAM(2:end,5)),'go','DisplayName','SquareWaveFAMSimu');
 plot(x, cell2mat(result.input3.FAM(2:end,6)),'g*');%,'DisplayName','SquareWaveFAMTheory'
 plot(x, cell2mat(result.input3.SSCA(2:end,5)),'gs');%,'DisplayName','SquareWaveSSCASimu'
 plot(x, cell2mat(result.input3.SSCA(2:end,6)),'g.');%,'DisplayName','SquareWaveSSCATheory'
 
+p1=plot(nan, nan,'ko','DisplayName','FAMSimu');
+p2=plot(nan, nan,'k*','DisplayName','FAMTheory');
+p3=plot(nan, nan,'ks','DisplayName','SSCASimu');
+p4=plot(nan, nan,'k.','DisplayName','SSCATheory');
+
 % title('The SQNR result of FAM & SSCA method for three input signal');
-legend([p1,p2,p3,p4,p5,p6],'Location','best');
+legend([p1,p2,p3,p4],'Location','best');
 xlabel('Bits B for each block');
 ylabel('SQNR (dB)');
