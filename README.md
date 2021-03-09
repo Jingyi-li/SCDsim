@@ -1,6 +1,6 @@
 # SCDsim
 
-## SCDsim/TestBentch.m: 
+## SCDsim/TestBench.m: 
 Run the simulation compare the floating point and fixed point. 
 
   Parameters:
