@@ -2,7 +2,8 @@ clear all; close all;clc
 %% Initialization
 Check_result = 0;
 Type = 'FAM';
-path = '/home/jingyi/Documents/Projects/FFT/Code/sandboxResult/SCAsim';
+% path = '/home/jingyi/Documents/Projects/FFT/Code/sandboxResult/SCAsim';
+path = pwd;
 %% DeepSig
 
 fname = 'Deepsig'
@@ -66,8 +67,8 @@ for index = 2:2
                                 [SxF,alphaoF,foF,resultF]=autosscaFixedNormv3(x,fs,df,dalpha,bit);
                                 [Sx,alphao,fo,result]=autosscaSingleNormv3(x,fs,df,dalpha,bit,resultF.Scale);
                         end
-                        save([path '/' filename '.mat'],'bit','result','resultF');
-                        disp(['-----------' 'save' filename '-----------']);
+%                         save([path '/' filename '.mat'],'bit','result','resultF');
+%                         disp(['-----------' 'save' filename '-----------']);
                         result_temp = printResult(result,resultF,bit,Type);
                     end
                     
@@ -144,8 +145,8 @@ for index = 2:2
                                 [SxF,alphaoF,foF,resultF]=autosscaFixedNormv3(x,fs,df,dalpha,bit);
                                 [Sx,alphao,fo,result]=autosscaSingleNormv3(x,fs,df,dalpha,bit,resultF.Scale);
                         end
-                        save([path '/' filename '.mat'],'bit','result','resultF');
-                        disp(['-----------' 'save' filename '-----------']);
+%                         save([path '/' filename '.mat'],'bit','result','resultF');
+%                         disp(['-----------' 'save' filename '-----------']);
                         result_temp = printResult(result,resultF,bit,Type);
                     end
                     
@@ -221,8 +222,8 @@ for index = 2:2
                                 [SxF,alphaoF,foF,resultF]=autosscaFixedNormv3(x,fs,df,dalpha,bit);
                                 [Sx,alphao,fo,result]=autosscaSingleNormv3(x,fs,df,dalpha,bit,resultF.Scale);
                         end
-                        save([path '/' filename '.mat'],'bit','result','resultF');
-                        disp(['-----------' 'save' filename '-----------']);
+%                         save([path '/' filename '.mat'],'bit','result','resultF');
+%                         disp(['-----------' 'save' filename '-----------']);
                         result_temp = printResult(result,resultF,bit,Type);
                     end
                     
