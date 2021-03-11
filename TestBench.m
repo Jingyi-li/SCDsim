@@ -2,8 +2,8 @@ clear all; close all;clc
 %% Initialization
 Check_result = 0;
 Type = 'FAM';
-% path = '/home/jingyi/Documents/Projects/FFT/Code/sandboxResult/SCAsim';
-path = pwd;
+path = '/home/jingyi/Documents/Projects/FFT/Code/sandboxResult/SCAsim';
+% path = pwd;
 %% DeepSig
 
 fname = 'Deepsig'
