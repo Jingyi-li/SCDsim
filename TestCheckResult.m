@@ -124,7 +124,7 @@ bit = unit_bit-1;
 Pnoise = (2*nFFT1^2*nFFT2*q1^4*q2^2*q3^2*Ps)/(1.59^2*6)*2^(-2*bit)+(2*nFFT1*nFFT2*q1^2*q3^2*q2^2*Ps)/(1.59^2)*(q1^2*(nFFT1/6-1)+1/2)/(3)*2^(-2*bit)...
     + q3^2*nFFT2/3*(q2^2+1/2)*2^(-2*bit) + (q3^2*(nFFT2/6-1)/(3) +1/6)*2^(-2*bit);
 
-unit_SQNR = 10*log10(Psignal/Pnoise);
+unit_SQNR = 10*log10(Ps/Pnoise);
 
 
 
