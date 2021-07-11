@@ -35,6 +35,7 @@ Run the simulation compare the floating point and fixed point.
 Plot the simulation result with theory result and there errors in SQNR
 ![FAMvsSSCA](https://user-images.githubusercontent.com/33167403/110423249-d3e04d00-80f4-11eb-808f-6fb40801fc63.jpg)
 ![ErrorsofSimandTheory](https://user-images.githubusercontent.com/33167403/110276177-b5ac1b80-8026-11eb-8acd-302c61dab12a.jpg)
+![fig5_2](https://user-images.githubusercontent.com/33167403/125195026-298d5780-e297-11eb-8f51-3f9e8af897f3.jpg)
 
 
 ## SCDsim/TestCheckResult.m
